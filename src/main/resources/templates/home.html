@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html xmlns="https://www.thymeleaf.org">
+<head>
+    <title>
+        URL SHORTENER
+    </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+        body{
+            background-color: aquamarine;
+            font-size: large;
+            color: blue;
+            text-align: center;
+        }
+        #submitButton{
+            font-style: 32px;
+        }
+        #short_url_div{
+            font-size: large;
+            font-weight: 800;
+            margin-top: 16px;
+            text-decoration: dotted;
+            text-shadow: 4px;
+            background-color: rgb(33, 245, 175);
+            color: rgb(130, 3, 248);
+        }
+    </style>
+    <script>
+        function myPost(){
+            fetch("/shorten",{
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        "orig_url": document.getElementById('client_url').value,
+                        "short_url":""
+                    })
+                })
+                .then(response => response.text())
+                .then(htmlcontent =>{
+                    document.getElementById("short_url_div").innerHTML = htmlcontent;
+                })
+                .catch(error => {
+                    window.alert('Error'+ error);
+                });
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h1>URL SHORTENER</h1>
+    <label for="client_url">Shorten url</label>
+    <input type="text" name="url" id="client_url">
+    <button type="submit" onclick="myPost()" id="submitButton">Submit</button>
+    <div id="short_url_div"></div>
+</body>
+</html>

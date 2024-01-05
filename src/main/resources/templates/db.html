@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DB</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style type="text/css">
+        table{
+            background-color: black;
+            color: white;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <table class="table table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">ShortURL</th>
+                <th scope="col">LongURL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="url: ${URLs}">
+                <th scope="row" th:text="${url.id}"></th>
+                <td th:text="${url.short_url}"></td>
+                <td th:text="${url.orig_url}"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
