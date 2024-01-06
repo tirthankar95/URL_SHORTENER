@@ -4,25 +4,21 @@ import com.spring.mitra.url_shortener.model.Url;
 import com.spring.mitra.url_shortener.services.Url_Service;
 
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Collection;
+import java.util.List;
 
 
 @Controller
 public class UrlController {
     
+    @Autowired
     private Url_Service url_service;
-    
-    public UrlController(Url_Service url_service) {
-        this.url_service = url_service;
-    }
 
     @RequestMapping("/")
     public String getHome() {
@@ -39,7 +35,7 @@ public class UrlController {
 
     @GetMapping("/db")
     public String getMethodName(Model model) {
-        Collection<Url> URLs = this.url_service.getAll();
+        List<Url> URLs = this.url_service.getAll();
         model.addAttribute("URLs", URLs);
         return "db";
     }
